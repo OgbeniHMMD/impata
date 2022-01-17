@@ -31,7 +31,8 @@ export default function Home() {
               SIGNUP
             </a>
           </nav>
-          <section className="p-8">
+
+          <section className="mx-auto max-w-screen-sm p-8">
             <div className="pb-4">
               <Link href="/">
                 <a>
@@ -44,13 +45,50 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="pb-8">
+            <div className="">
               <img
                 src="/images/auth-page/learning-and-development.png"
                 className="h-auto mx-auto w-64"
                 alt=""
               />
             </div>
+
+            <form className="py-12">
+              <div className="">
+                <div className="bg-white -mt-3 text-sm ml-4 px-2 text-gray-500 absolute">
+                  Email/Username
+                </div>
+                <div className="border rounded overflow-hidden">
+                  <input className="bg-transparent text-sm w-full p-4" />
+                </div>
+              </div>
+
+              <div className="pt-8">
+                <div className="bg-white -mt-3 text-sm ml-4 px-2 text-gray-500 absolute">
+                  Password
+                </div>
+                <div className="border rounded overflow-hidden">
+                  <input className="bg-transparent text-sm w-full p-4" />
+                </div>
+              </div>
+
+              <div className="flex space-x-4 text-xs py-2 justify-between md:text-sm">
+                <a className="cursor-pointer text-primary hover:underline">
+                  Forgot your password?
+                </a>
+                <a className="cursor-pointer text-primary hover:underline">
+                  Resend verification mail
+                </a>
+              </div>
+
+              <div className="flex py-12 justify-center">
+                <Link href="/dashboard">
+                  <a className="bg-primary rounded cursor-pointer font-medium min-w-full text-center text-white py-3 transition md:min-w-sm md:px-16 hover:bg-primary-light">
+                    LOGIN
+                  </a>
+                </Link>
+              </div>
+            </form>
           </section>
         </section>
       </main>
