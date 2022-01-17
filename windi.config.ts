@@ -12,8 +12,9 @@ export default defineConfig({
       },
       colors: {
         primary: {
-          DEFAULT: "#00B69E",
-          light: "#3DD381",
+          DEFAULT: "#04796A",
+          lighter: "#3DD381",
+          light: "#00B69E",
         },
       },
     },
