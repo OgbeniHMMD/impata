@@ -1,15 +1,24 @@
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-br from-primary-light to-primary h-screen">
+    <div className="bg-gradient-to-br from-primary-light to-primary font-poppins h-screen">
       <Head>
         <title>Impata</title>
         <meta name="description" content="Powered by Today's Solution" />
         <link rel="icon" href="/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <main className="flex h-full p-4 justify-center items-center">

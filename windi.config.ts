@@ -7,6 +7,9 @@ export default defineConfig({
   },
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         primary: {
           DEFAULT: "#00B69E",
