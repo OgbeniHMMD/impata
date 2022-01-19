@@ -3,19 +3,19 @@ import Link from "next/link";
 const Links = [
   [
     {
-      name: "dashboard",
+      alias: "dashboard",
       title: "Dashboard",
       slug: "/dashboard",
       icon: "/icons/dashboard.svg",
     },
     {
-      name: "courses",
+      alias: "courses",
       title: "Courses",
       slug: "/dashboard/courses",
       icon: "/icons/cover.svg",
     },
     {
-      name: "school",
+      alias: "school",
       title: "School",
       slug: "/dashboard/school",
       icon: "/icons/people.svg",
@@ -23,13 +23,13 @@ const Links = [
   ],
   [
     {
-      name: "faq",
+      alias: "faq",
       title: "FAQ",
       slug: "/dashboard/faq",
       icon: "/icons/alert.svg",
     },
     {
-      name: "tutorials",
+      alias: "tutorials",
       title: "Tutorials",
       slug: "/dashboard/tutorials",
       icon: "/icons/chat.svg",
@@ -37,9 +37,9 @@ const Links = [
   ],
 ];
 
-export default function DashboardNavigationDrawer({ page }: PageProps) {
+export default function DashboardNavigationDrawer({ alias }: PageProps) {
   return (
-    <aside className="border flex bg-light-300 rounded-t-3xl shadow-xl text-sm w-full bottom-0 gap-4 overflow-hidden justify-between fixed md:(rounded-none border-none shadow-inner relative flex-col order-first max-w-28 py-4) ">
+    <aside className="border flex bg-light-300 rounded-t-3xl shadow-xl text-sm w-full bottom-0 gap-4 overflow-hidden justify-between fixed md:(rounded-none border-none shadow-inner relative flex-col order-first max-w-28 p-4) ">
       <section className="border-b flex w-full gap-4 justify-between md:(flex-col gap-8 pb-4) ">
         {Links[0].map((link, i) => (
           <NavCard
@@ -47,19 +47,19 @@ export default function DashboardNavigationDrawer({ page }: PageProps) {
             icon={link.icon}
             slug={link.slug}
             title={link.title}
-            active={page == link.name}
+            active={alias == link.alias}
           />
         ))}
       </section>
 
-      <section className="border-t bg-gray-100 w-full gap-4 hidden md:(flex-col pt-4 pb-32 flex) ">
+      <section className="border-t w-full gap-4 hidden md:(flex-col pt-4 pb-32 flex) ">
         {Links[1].map((link, i) => (
           <NavCard
             key={i}
             icon={link.icon}
             slug={link.slug}
             title={link.title}
-            active={page == link.name}
+            active={alias == link.alias}
           />
         ))}
       </section>
@@ -71,7 +71,7 @@ export function NavCard({ icon, title, slug, active }: LinkProps) {
   return (
     <Link href={slug}>
       <a
-        className={`border-primary p-2 group md:(border-t-0 px-4 py-0) text-sm capitalize ${
+        className={`border-primary flex flex-col justify-center bg-transparent items-center p-2 group text-center md:(border-t-0 p-0) text-sm capitalize ${
           active ? "border-t-4 md: border-r-4" : ""
         }`}
       >
@@ -80,7 +80,7 @@ export function NavCard({ icon, title, slug, active }: LinkProps) {
           className="mx-auto h-6 w-6 filter grayscale group-hover:(grayscale-0)"
           alt={title}
         />
-        <div className="font-medium text-center pt-1 group-hover:(text-primary)">
+        <div className="font-medium mx-auto text-center pt-1 group-hover:(text-primary)">
           {title}
         </div>
       </a>
@@ -96,5 +96,5 @@ interface LinkProps {
 }
 
 interface PageProps {
-  page: string;
+  alias: string;
 }
