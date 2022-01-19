@@ -5,7 +5,7 @@ import DashboardTodoCard from "../components/Dashboard/DashboardTodoCard";
 import DashboardTopNavBar from "../components/Dashboard/DashboardTopNavBar";
 import SearchBar from "../components/_partials/SearchBar";
 
-export default function DashboardLayout({ children, title, page }: Props) {
+export default function DashboardLayout({ children, title, alias }: Props) {
   return (
     <div>
       <Head>
@@ -43,7 +43,7 @@ export default function DashboardLayout({ children, title, page }: Props) {
             </nav>
           </section>
 
-          <DashboardNavigationDrawer page={page} />
+          <DashboardNavigationDrawer alias={alias} />
         </main>
       </section>
     </div>
@@ -53,5 +53,5 @@ export default function DashboardLayout({ children, title, page }: Props) {
 interface Props {
   children: any;
   title: string;
-  page: string;
+  alias: string;
 }
