@@ -3,13 +3,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-br from-primary-lighter to-primary-light font-poppins h-screen text-dark-100">
+    <div className="bg-gradient-to-br from-primary-lighter to-primary-light font-poppins min-h-screen text-dark-100">
       <Head>
         <title>Impata - Login</title>
       </Head>
 
-      <main className="flex h-full p-4 justify-center items-center">
-        <section className="bg-white border rounded mx-auto max-w-screen-md w-full overflow-hidden">
+      <main className="flex min-h-full p-4 justify-center items-center md:(min-h-screen)">
+        <section className="bg-white border rounded mx-auto max-w-screen-sm w-full overflow-hidden">
           <nav className="flex font-black -my-[2px] text-lg justify-between">
             <a className="cursor-pointer flex-grow -mx-[2px] text-center p-4 text-gray-500 w-1/2 md:p-6 hover:(bg-primary text-light-300) ">
               LOGIN
