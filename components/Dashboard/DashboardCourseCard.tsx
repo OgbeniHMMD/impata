@@ -17,10 +17,8 @@ export default function DashboardCourseCard({
 
         <div className="p-4 ">
           <div className="flex w-full justify-between items-center">
-            <div className="flex-grow pb-4">
-              <div className="text-primary pb-1 capitalize md:text-lg">
-                {courseTitle}
-              </div>
+            <div className="flex-grow">
+              <div className="text-primary pb-1 capitalize">{courseTitle}</div>
               <div className="text-sm text-gray-700 uppercase">
                 {courseCode}
               </div>
@@ -46,7 +44,7 @@ export default function DashboardCourseCard({
           </div>
 
           {!!progress && (
-            <div className="rounded-full bg-gray-100 h-2 w-full">
+            <div className="rounded-full bg-gray-100 h-2 mt-2 w-full">
               <div
                 className="bg-gradient-to-r from-primary-lighter via-light to-primary rounded-full h-2"
                 style={{ width: progress }}
