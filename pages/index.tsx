@@ -1,7 +1,32 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useState } from "react";
+import Router from "next/router";
 
 export default function LoginPage(props: any) {
+  const { register, handleSubmit, reset } = useForm({});
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const login = (payload: Payload) => {
+    setErrorMsg(null);
+
+    axios
+      .post("https://lmsapi.impata.com/users/authenticate", payload)
+      .then((response) => {
+        reset();
+        localStorage.setItem("userData", JSON.stringify(response?.data));
+        Router.push("/dashboard");
+      })
+      .catch((e) => {
+        setErrorMsg(
+          e?.response?.data.message ||
+            "Sorry, an error occured. Please try again"
+        );
+      });
+  };
+
   return (
     <div className="bg-gradient-to-br from-primary-lighter to-primary-light font-poppins min-h-screen text-dark-100">
       <Head>
@@ -40,13 +65,26 @@ export default function LoginPage(props: any) {
               />
             </div>
 
-            <form className="py-12">
+            {!!errorMsg && (
+              <div className="border rounded border-l-4 border-red-500 text-sm p-3 text-gray-600 capitalize">
+                {errorMsg}
+              </div>
+            )}
+
+            <form
+              className="py-12"
+              onSubmit={handleSubmit((data) => login(data))}
+            >
               <div className="">
                 <div className="bg-white -mt-3 text-sm ml-4 px-2 text-gray-500 absolute">
                   Email/Username
                 </div>
                 <div className="border rounded overflow-hidden">
-                  <input className="bg-transparent text-sm w-full p-4 text-dark-50" />
+                  <input
+                    // type="email"
+                    className="bg-transparent text-sm w-full p-4 text-dark-50"
+                    {...register("username", { required: true })}
+                  />
                 </div>
               </div>
 
@@ -55,7 +93,11 @@ export default function LoginPage(props: any) {
                   Password
                 </div>
                 <div className="border rounded overflow-hidden">
-                  <input className="bg-transparent text-sm w-full p-4 text-dark-50" />
+                  <input
+                    type="password"
+                    className="bg-transparent text-sm w-full p-4 text-dark-50"
+                    {...register("password", { required: true })}
+                  />
                 </div>
               </div>
 
@@ -63,17 +105,18 @@ export default function LoginPage(props: any) {
                 <a className="cursor-pointer text-primary hover:underline">
                   Forgot your password?
                 </a>
-                <a className="cursor-pointer text-primary hover:underline">
+                <button className="cursor-pointer text-primary hover:underline">
                   Resend verification mail
-                </a>
+                </button>
               </div>
 
               <div className="flex py-12 justify-center">
-                <Link href="/dashboard">
-                  <a className="bg-primary rounded cursor-pointer font-medium min-w-full text-center text-white py-3 transition md:min-w-sm md:px-16 hover:bg-primary-light">
-                    LOGIN
-                  </a>
-                </Link>
+                <button
+                  type="submit"
+                  className="bg-primary rounded cursor-pointer font-medium min-w-full text-center text-white py-3 transition md:min-w-sm md:px-16 hover:bg-primary-light"
+                >
+                  LOGIN
+                </button>
               </div>
             </form>
           </section>
@@ -87,4 +130,9 @@ export async function getStaticProps(context: any) {
   return {
     props: {}, // will be passed to the page component as props
   };
+}
+
+interface Payload {
+  username?: string;
+  password?: string;
 }
