@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 
 export default function LoginPage(props: any) {
@@ -29,6 +29,12 @@ export default function LoginPage(props: any) {
       })
       .finally(() => setFetching(false));
   };
+
+  useEffect(() => {
+    // Auto redirect to dashboard if user is logged in
+    const UserData = localStorage.getItem("userData");
+    if (!!UserData) Router.replace("/dashboard");
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-primary-lighter to-primary-light font-poppins min-h-screen text-dark-100">

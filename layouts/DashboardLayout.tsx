@@ -37,7 +37,8 @@ export default function DashboardLayout({ children, title, alias }: Props) {
 
   useEffect(() => {
     const UserData = localStorage.getItem("userData");
-    if (!!!UserData) Router.push("/");
+
+    if (!!!UserData) Router.replace("/");
     else {
       const payload = JSON.parse(UserData);
       setUserData(payload);
