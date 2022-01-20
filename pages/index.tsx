@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-export default function Home() {
+export default function LoginPage(props: any) {
   return (
     <div className="bg-gradient-to-br from-primary-lighter to-primary-light font-poppins min-h-screen text-dark-100">
       <Head>
@@ -81,4 +81,10 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps(context: any) {
+  return {
+    props: {}, // will be passed to the page component as props
+  };
 }

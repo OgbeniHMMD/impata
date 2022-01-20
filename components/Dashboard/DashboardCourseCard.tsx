@@ -58,7 +58,7 @@ export default function DashboardCourseCard({
 }
 
 interface Props {
-  id: string;
+  id: number;
   progress: number;
   imageUrl: string;
   courseCode: string;
