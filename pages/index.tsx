@@ -8,9 +8,11 @@ import Router from "next/router";
 export default function LoginPage(props: any) {
   const { register, handleSubmit, reset } = useForm({});
   const [errorMsg, setErrorMsg] = useState(null);
+  const [fetching, setFetching] = useState(false);
 
   const login = async (payload: Payload) => {
     setErrorMsg(null);
+    setFetching(true);
 
     await axios
       .post("https://lmsapi.impata.com/users/authenticate", payload)
@@ -24,7 +26,8 @@ export default function LoginPage(props: any) {
           e?.response?.data.message ||
             "Sorry, an error occured. Please try again"
         );
-      });
+      })
+      .finally(() => setFetching(false));
   };
 
   return (
@@ -111,17 +114,36 @@ export default function LoginPage(props: any) {
               </div>
 
               <div className="flex py-12 justify-center">
-                <button
-                  type="submit"
-                  className="bg-primary rounded cursor-pointer font-medium min-w-full text-center text-white py-3 transition md:min-w-sm md:px-16 hover:bg-primary-light"
-                >
-                  LOGIN
-                </button>
+                {fetching ? (
+                  <LoadingButton />
+                ) : (
+                  <button
+                    type="submit"
+                    className="bg-primary rounded cursor-pointer font-medium min-w-full text-center text-white py-3 transition md:(min-w-sm px-16) hover:bg-primary-light "
+                  >
+                    LOGIN
+                  </button>
+                )}
               </div>
             </form>
           </section>
         </section>
       </main>
+    </div>
+  );
+}
+
+export function LoadingButton() {
+  return (
+    <div className="bg-primary-light rounded cursor-not-allowed font-medium min-w-full text-center text-white py-4 transition md:(min-w-sm px-16) ">
+      <div className="flex space-x-4 justify-center">
+        {[...new Array(3)].map((el, i) => (
+          <div
+            className="bg-white rounded-full bg-opacity-90 h-3 animate-pulse w-3"
+            key={i}
+          />
+        ))}
+      </div>
     </div>
   );
 }
