@@ -81,7 +81,7 @@ const courses = [
 export default function DashboardHome() {
   return (
     <DashboardLayout title="Dashboard" alias="dashboard">
-      <section className="grid py-4 gap-4 grid-cols-1 md:gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <section className="grid py-4 gap-4 grid-cols-1 sm:grid-cols-2 lg:(grid-cols-3 gap-6) xl:grid-cols-4 ">
         {courses.map((course, i) => (
           <DashboardCourseCard
             key={i}
