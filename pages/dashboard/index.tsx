@@ -1,11 +1,8 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import DashboardCourseCard from "../../components/Dashboard/DashboardCourseCard";
 import DashboardLayout from "../../layouts/DashboardLayout";
-
-const queryClient = new QueryClient();
 
 export default function DashboardHome() {
   const UserData =
@@ -33,7 +30,7 @@ export default function DashboardHome() {
 
   return (
     <DashboardLayout title="Dashboard" alias="dashboard">
-      {courses.length > 0 ? (
+      {fetching || courses.length > 0 ? (
         <section className="grid py-4 gap-4 grid-cols-1 sm:grid-cols-2 lg:(grid-cols-3 gap-6) xl:grid-cols-4 ">
           {fetching &&
             [...new Array(4)].map((el, i) => <SkeletonLoader key={i} />)}

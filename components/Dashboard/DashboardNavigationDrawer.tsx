@@ -40,7 +40,7 @@ const Links = [
 export default function DashboardNavigationDrawer({ alias }: PageProps) {
   return (
     <aside className="border flex bg-light-300 rounded-t-3xl shadow-xl text-sm w-full bottom-0 gap-4 overflow-hidden justify-between fixed md:(rounded-none border-none shadow-inner relative flex-col order-first max-w-32 py-4) ">
-      <section className="border-b flex w-full gap-0s justify-between md:(flex-col gap-8 pb-4) ">
+      <section className="border-b flex w-full justify-between md:(flex-col gap-8 pb-4) ">
         {Links[0].map((link, i) => (
           <NavCard
             key={i}
@@ -72,7 +72,7 @@ export function NavCard({ icon, title, slug, status }: LinkProps) {
     <Link href={slug}>
       <a
         className={`border-primary flex flex-col justify-center w-full bg-transparent items-center p-2 group text-center md:(border-t-0 p-0) text-sm capitalize ${
-          !!status ? "border-t-4 md: border-r-4" : ""
+          !!status ? "border-t-4 md:border-r-4" : ""
         }`}
       >
         <img
