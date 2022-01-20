@@ -19,7 +19,7 @@ export default function LoginPage(props: any) {
       .then((response) => {
         reset();
         localStorage.setItem("userData", JSON.stringify(response?.data));
-        Router.push("/dashboard");
+        Router.replace("/dashboard");
       })
       .catch((e) => {
         setErrorMsg(
