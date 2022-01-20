@@ -35,7 +35,7 @@ export default function DashboardHome() {
           {fetching &&
             [...new Array(4)].map((el, i) => <SkeletonLoader key={i} />)}
 
-          {courses.map((course, i) => (
+          {courses.map((course: Course, i) => (
             <DashboardCourseCard
               key={i}
               id={course?.id}
@@ -67,4 +67,12 @@ export function SkeletonLoader() {
       </div>
     </div>
   );
+}
+
+interface Course {
+  id: number;
+  progress: number;
+  imageUrl: string;
+  courseCode: string;
+  courseTitle: string;
 }
