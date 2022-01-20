@@ -26,31 +26,36 @@ export default function DashboardHome() {
             Authorization: `Bearer ${UserData?.token}`,
           },
         })
-        .then((response) => setCourses(response?.data))
-        .catch((e) => setErrorMsg(e?.response?.message))
+        .then((response) => setCourses(response?.data || []))
+        .catch((e) => setErrorMsg(e?.response?.data?.message))
         .finally(() => setFetching(false)))();
   }, []);
 
   return (
     <DashboardLayout title="Dashboard" alias="dashboard">
-      <section className="grid py-4 gap-4 grid-cols-1 sm:grid-cols-2 lg:(grid-cols-3 gap-6) xl:grid-cols-4 ">
-        {console.log(fetching)}
-        {fetching &&
-          [...new Array(4)].map((el, i) => <SkeletonLoader key={i} />)}
+      {courses.length > 0 ? (
+        <section className="grid py-4 gap-4 grid-cols-1 sm:grid-cols-2 lg:(grid-cols-3 gap-6) xl:grid-cols-4 ">
+          {fetching &&
+            [...new Array(4)].map((el, i) => <SkeletonLoader key={i} />)}
 
-        {!!errorMsg && <div>{errorMsg}</div>}
-
-        {courses.map((course, i) => (
-          <DashboardCourseCard
-            key={i}
-            id={course?.id}
-            progress={course?.progress}
-            imageUrl={course?.imageUrl}
-            courseCode={course?.courseCode}
-            courseTitle={course?.courseTitle}
-          />
-        ))}
-      </section>
+          {courses.map((course, i) => (
+            <DashboardCourseCard
+              key={i}
+              id={course?.id}
+              progress={course?.progress}
+              imageUrl={course?.imageUrl}
+              courseCode={course?.courseCode}
+              courseTitle={course?.courseTitle}
+            />
+          ))}
+        </section>
+      ) : (
+        <div>
+          <div className="text-lg text-center py-16">
+            {errorMsg || "You have courses available"}
+          </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 }
