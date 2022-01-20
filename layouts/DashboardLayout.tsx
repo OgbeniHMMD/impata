@@ -1,18 +1,57 @@
+import axios from "axios";
 import Head from "next/head";
-import Link from "next/link";
+import Router from "next/router";
+import { useEffect, useState } from "react";
 import DashboardNavigationDrawer from "../components/Dashboard/DashboardNavigationDrawer";
 import DashboardTodoCard from "../components/Dashboard/DashboardTodoCard";
 import DashboardTopNavBar from "../components/Dashboard/DashboardTopNavBar";
 import SearchBar from "../components/_partials/SearchBar";
 
 export default function DashboardLayout({ children, title, alias }: Props) {
+  const [userData, setUserData] = useState({
+    id: undefined,
+    name: undefined,
+    token: undefined,
+    avatar: undefined,
+    domain: undefined,
+    username: undefined,
+    isAdmin: undefined,
+    privateSchoolID: undefined,
+    profileImage: undefined,
+  });
+
+  const fetchAvatar = async (payload: UserDataInterface) => {
+    if (!!!userData?.avatar)
+      await axios
+        .get(
+          `https://lmsapi.impata.com/useraccount/getuserprofileimage?userid=${
+            payload?.id || 36
+          }`
+        )
+        .then((response) => {
+          const avatar = response?.data?.url;
+          const UserData = JSON.stringify({ ...payload, avatar });
+          localStorage.setItem("userData", UserData);
+        });
+  };
+
+  useEffect(() => {
+    const UserData = localStorage.getItem("userData");
+    if (!!!UserData) Router.push("/");
+    else {
+      const payload = JSON.parse(UserData);
+      setUserData(payload);
+      fetchAvatar(payload);
+    }
+  }, []);
+
   return (
-    <div>
+    <div className="font-poppins text-dark-100">
       <Head>
         <title>Impata - Dashboard</title>
       </Head>
 
-      <section className="flex flex-col font-poppins text-dark-100 justify-between md:(overflow-hidden h-screen max-h-screen) ">
+      <section className="flex flex-col justify-between md:(overflow-hidden h-screen max-h-screen) ">
         <DashboardTopNavBar />
 
         <main className="flex flex-col h-full justify-between md:flex-row">
@@ -54,4 +93,16 @@ interface Props {
   children: any;
   title: string;
   alias: string;
+}
+
+interface UserDataInterface {
+  id: number;
+  name: string;
+  token: string;
+  avatar: string;
+  domain: string;
+  username: string;
+  isAdmin: boolean;
+  privateSchoolID: number;
+  profileImage: string;
 }

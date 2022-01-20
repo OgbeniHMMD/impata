@@ -9,10 +9,10 @@ export default function LoginPage(props: any) {
   const { register, handleSubmit, reset } = useForm({});
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const login = (payload: Payload) => {
+  const login = async (payload: Payload) => {
     setErrorMsg(null);
 
-    axios
+    await axios
       .post("https://lmsapi.impata.com/users/authenticate", payload)
       .then((response) => {
         reset();
