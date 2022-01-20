@@ -1,16 +1,28 @@
 import Link from "next/link";
 
-export default function DashboardTodoCard() {
+export default function DashboardTodoCard({
+  slug,
+  title,
+  points,
+  dateTime,
+}: Props) {
   return (
     <div className="border-b flex flex-col space-y-1 text-sm py-4 group">
-      <Link href="#">
+      <Link href={slug}>
         <a className="font-bold text-primary text-base pb-1 group-hover:text-primary-light">
-          Module 1 Quiz
+          {title}
         </a>
       </Link>
       <div>Introduction to physics</div>
-      <div>50 Points</div>
-      <div>Apr 20, 2020 at 11:59 PM</div>
+      <div>{points} Points</div>
+      <div>{dateTime}</div>
     </div>
   );
+}
+
+interface Props {
+  slug: string;
+  title: string;
+  points: number;
+  dateTime: string;
 }

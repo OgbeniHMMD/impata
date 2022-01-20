@@ -3,7 +3,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import DashboardNavigationDrawer from "../components/Dashboard/DashboardNavigationDrawer";
-import DashboardTodoCard from "../components/Dashboard/DashboardTodoCard";
+import DashboardTodoSection from "../components/Dashboard/DashboardTodoSection";
 import DashboardTopNavBar from "../components/Dashboard/DashboardTopNavBar";
 import SearchBar from "../components/_partials/SearchBar";
 
@@ -68,20 +68,7 @@ export default function DashboardLayout({ children, title, alias }: Props) {
             </section>
           </section>
 
-          <section className="h-full shadow-xl p-4 md:(px-8 w-1/4) ">
-            <header className="border-b font-medium text-xl pb-2">TO-DO</header>
-
-            <DashboardTodoCard />
-            <DashboardTodoCard />
-            <DashboardTodoCard />
-
-            <nav className="text-center p-4">
-              <button className="rounded cursor-pointer text-primary text-sm py-2 px-4 hover:(bg-gray-100 text-primary-light cursor-pointer) ">
-                View 6 more assignments
-              </button>
-            </nav>
-          </section>
-
+          <DashboardTodoSection />
           <DashboardNavigationDrawer alias={alias} />
         </main>
       </section>
