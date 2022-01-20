@@ -48,7 +48,7 @@ export default function DashboardLayout({ children, title, alias }: Props) {
   return (
     <div className="font-poppins text-dark-100">
       <Head>
-        <title>Impata - Dashboard</title>
+        <title>Impata - {title}</title>
       </Head>
 
       <section className="flex flex-col justify-between md:(overflow-hidden h-screen max-h-screen) ">
