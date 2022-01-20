@@ -1,7 +1,13 @@
 import { LogoutIcon, MoonIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import Router from "next/router";
 
 export default function ProfileDropdown({ avatar, name, username }: Props) {
+  const logout = () => {
+    localStorage.removeItem("userData");
+    Router.replace("/");
+  };
+
   return (
     <span className="dropdown relative self-center">
       <div className="rounded flex font-medium space-x-2 text-xs px-2 text-dark-50 items-center hover:(bg-gray-100 text-primary cursor-pointer) ">
@@ -34,7 +40,7 @@ export default function ProfileDropdown({ avatar, name, username }: Props) {
         </button>
 
         <button
-          //   onClick={() => logout()}
+          onClick={() => logout()}
           className="border-t flex text-dark text-xs text-left w-full py-3 px-4 items-center hover:bg-primary-lighter hover:text-white"
         >
           <LogoutIcon className="h-4 mr-2 w-4" />
